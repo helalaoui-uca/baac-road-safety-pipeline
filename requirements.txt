@@ -1,0 +1,12 @@
+numpy
+pandas
+pyarrow
+scikit-learn
+matplotlib
+seaborn
+mlxtend          # association rules (step 02)
+hdbscan          # HDBSCAN (step 03, optional)
+xgboost          # XGBoost models (step 04/05)
+lightgbm         # LightGBM model (step 04)
+imbalanced-learn # SMOTENC (XGBoost-SMOTE)
+shap             # interpretability (step 04, optional)
