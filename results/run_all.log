@@ -1,0 +1,884 @@
+
+======================================================================
+BAAC pipeline | raw: C:\Users\UCA\Desktop\secu2\data | JOIN_ON_NUM_VEH=True
+======================================================================
+
+======================================================================
+STEP 00 - data overview
+======================================================================
+[14:07:57] === Part 1: dataset inventory ===
+ year             file  found  n_rows  n_columns
+ 2005 caracteristiques   True   87026         16
+ 2005            lieux   True   87026         18
+ 2005        vehicules   True  149764          9
+ 2005          usagers   True  197498         12
+ 2006 caracteristiques   True   82993         16
+ 2006            lieux   True   82993         18
+ 2006        vehicules   True  142300          9
+ 2006          usagers   True  187085         12
+ 2007 caracteristiques   True   83850         16
+ 2007            lieux   True   83850         18
+ 2007        vehicules   True  144130          9
+ 2007          usagers   True  188457         12
+ 2008 caracteristiques   True   76767         16
+ 2008            lieux   True   76767         18
+ 2008        vehicules   True  131048          9
+ 2008          usagers   True  170960         12
+ 2009 caracteristiques   True   74409         16
+ 2009            lieux   True   74409         18
+ 2009        vehicules   True  126347          9
+ 2009          usagers   True  165962         12
+ 2010 caracteristiques   True   69379         16
+ 2010            lieux   True   69379         18
+ 2010        vehicules   True  117743          9
+ 2010          usagers   True  154192         12
+ 2011 caracteristiques   True   66974         16
+ 2011            lieux   True   66974         18
+ 2011        vehicules   True  113854          9
+ 2011          usagers   True  148543         12
+ 2012 caracteristiques   True   62250         16
+ 2012            lieux   True   62250         18
+ 2012        vehicules   True  105814          9
+ 2012          usagers   True  138628         12
+ 2013 caracteristiques   True   58397         16
+ 2013            lieux   True   58397         18
+ 2013        vehicules   True   98925          9
+ 2013          usagers   True  128694         12
+ 2014 caracteristiques   True   59854         16
+ 2014            lieux   True   59854         18
+ 2014        vehicules   True  101762          9
+ 2014          usagers   True  132186         12
+ 2015 caracteristiques   True   58654         16
+ 2015            lieux   True   58654         18
+ 2015        vehicules   True   99778          9
+ 2015          usagers   True  130378         12
+ 2016 caracteristiques   True   59432         16
+ 2016            lieux   True   59432         18
+ 2016        vehicules   True  101924          9
+ 2016          usagers   True  133422         12
+ 2017 caracteristiques   True   60701         16
+ 2017            lieux   True   60701         18
+ 2017        vehicules   True  103546          9
+ 2017          usagers   True  136021         12
+ 2018 caracteristiques   True   57783         16
+ 2018            lieux   True   57783         18
+ 2018        vehicules   True   98876          9
+ 2018          usagers   True  130169         12
+ 2019 caracteristiques   True   58840         15
+ 2019            lieux   True   58840         18
+ 2019        vehicules   True  100710         11
+ 2019          usagers   True  132977         15
+ 2020 caracteristiques   True   47744         15
+ 2020            lieux   True   47744         18
+ 2020        vehicules   True   81066         11
+ 2020          usagers   True  105295         15
+ 2021 caracteristiques   True   56518         15
+ 2021            lieux   True   56518         18
+ 2021        vehicules   True   97315         11
+ 2021          usagers   True  129248         16
+ 2022 caracteristiques   True   55302         15
+ 2022            lieux   True   55302         18
+ 2022        vehicules   True   94493         11
+ 2022          usagers   True  126662         16
+ 2023 caracteristiques   True   54822         15
+ 2023            lieux   True   70860         18
+ 2023        vehicules   True   93585         11
+ 2023          usagers   True  125789         16
+ 2024 caracteristiques   True   54402         15
+ 2024            lieux   True   70248         18
+ 2024        vehicules   True   92678         11
+ 2024          usagers   True  125187         16
+
+Total rows per file type:
+file
+caracteristiques    1286097
+lieux               1317981
+usagers             2887353
+vehicules           2195658
+Name: n_rows, dtype: int64
+
+[caracteristiques] columns absent in some years (potential breaks):
+['Num_Acc', 'gps', 'Accident_Id']
+
+[lieux] columns absent in some years (potential breaks):
+['env1', 'vma']
+
+[vehicules] columns absent in some years (potential breaks):
+['id_vehicule', 'motor']
+
+[usagers] columns absent in some years (potential breaks):
+['secu', 'id_vehicule', 'secu1', 'secu2', 'secu3', 'id_usager']
+[14:08:41] === Part 2: missing values ===
+[14:08:49] Done. Results in C:\Users\UCA\Desktop\baac_final\outputs\00_data_overview
+
+======================================================================
+STEP 02 - risk factors
+======================================================================
+[14:08:57] Loading parquet dataset: C:\Users\UCA\Desktop\baac_final\data\processed\parquet
+[14:08:57] Loaded 2,887,353 rows x 32 columns (0.71 GB in memory).
+[14:08:58] === 1. Correlations ===
+
+Spearman correlation with severity:
+age              -0.076
+nbv              -0.061
+lat              -0.049
+lartpc           -0.047
+jour_semaine      0.040
+larrout           0.026
+vma               0.023
+heure_accident   -0.017
+long              0.005
+Name: gravite_ordinale, dtype: float64
+[14:09:26] === 2. PCA ===
+[PCA] 1,396,160 rows with residual NaN dropped.
+
+Explained variance per component:
+  PC1: 17.7 % (cumulative: 17.7 %)
+  PC2: 13.1 % (cumulative: 30.9 %)
+  PC3: 11.9 % (cumulative: 42.7 %)
+  PC4: 11.2 % (cumulative: 53.9 %)
+  PC5: 11.1 % (cumulative: 65.0 %)
+[14:09:31] === 3. Association rules ===
+[Association] Random sample of 300,000 rows (of 2,887,353).
+[14:11:41] [Association] Apriori (stricter support)...
+
+[Apriori] 47716 rules, 1641 about serious accidents.
+                           antecedents                                           consequents  support  confidence     lift
+          frozenset({circ=2.0, agg=1})            frozenset({catr=3.0, accident_grave=True}) 0.069290    0.334551 3.013341
+                 frozenset({catr=3.0})     frozenset({circ=2.0, agg=1, accident_grave=True}) 0.069290    0.206390 2.385554
+          frozenset({catr=3.0, agg=1})            frozenset({circ=2.0, accident_grave=True}) 0.069290    0.386900 2.365737
+        frozenset({int=1.0, catr=3.0})               frozenset({agg=1, accident_grave=True}) 0.064233    0.265398 2.335768
+          frozenset({circ=2.0, agg=1})            frozenset({catv=7.0, accident_grave=True}) 0.054583    0.263543 2.237400
+       frozenset({circ=2.0, catr=3.0})               frozenset({agg=1, accident_grave=True}) 0.069290    0.251576 2.214126
+          frozenset({catr=3.0, agg=1})             frozenset({int=1.0, accident_grave=True}) 0.064233    0.358665 2.103896
+          frozenset({circ=2.0, agg=1})             frozenset({int=1.0, accident_grave=True}) 0.074270    0.358596 2.103490
+      frozenset({infra=0.0, catr=3.0})               frozenset({agg=1, accident_grave=True}) 0.067937    0.234983 2.068086
+       frozenset({catr=3.0, vosp=0.0})               frozenset({agg=1, accident_grave=True}) 0.074017    0.232684 2.047851
+                    frozenset({agg=1})   frozenset({int=1.0, catr=3.0, accident_grave=True}) 0.064233    0.182250 2.047827
+       frozenset({catr=3.0, sexe=1.0})               frozenset({agg=1, accident_grave=True}) 0.052493    0.232189 2.043499
+                 frozenset({catr=3.0})      frozenset({obs=0.0, agg=1, accident_grave=True}) 0.050777    0.151246 2.030142
+        frozenset({int=1.0, catr=3.0})            frozenset({circ=2.0, accident_grave=True}) 0.080073    0.330845 2.022981
+ frozenset({int=1.0, catr=3.0, agg=1})                      frozenset({accident_grave=True}) 0.064233    0.446654 2.018685
+                 frozenset({catr=3.0})    frozenset({infra=0.0, agg=1, accident_grave=True}) 0.067937    0.202359 2.012522
+       frozenset({manv=1.0, catr=3.0})            frozenset({circ=2.0, accident_grave=True}) 0.052937    0.329072 2.012138
+         frozenset({infra=0.0, agg=1})            frozenset({catr=3.0, accident_grave=True}) 0.067937    0.222911 2.007788
+                    frozenset({agg=1})  frozenset({circ=2.0, catr=3.0, accident_grave=True}) 0.069290    0.196597 2.007185
+                 frozenset({catr=3.0})     frozenset({vosp=0.0, accident_grave=True, agg=1}) 0.074017    0.220469 1.999781
+                 frozenset({catr=3.0})     frozenset({sexe=1.0, agg=1, accident_grave=True}) 0.052493    0.156359 1.989383
+                 frozenset({catr=3.0})               frozenset({agg=1, accident_grave=True}) 0.075843    0.225910 1.988238
+ frozenset({circ=2.0, int=1.0, agg=1})                      frozenset({accident_grave=True}) 0.074270    0.439424 1.986008
+          frozenset({agg=1, sexe=1.0})            frozenset({catr=3.0, accident_grave=True}) 0.052493    0.220092 1.982391
+                 frozenset({catr=3.0})     frozenset({surf=1.0, accident_grave=True, agg=1}) 0.057387    0.170934 1.982001
+          frozenset({catr=3.0, agg=1})            frozenset({vosp=0.0, accident_grave=True}) 0.074017    0.413293 1.981968
+                    frozenset({agg=1}) frozenset({infra=0.0, catr=3.0, accident_grave=True}) 0.067937    0.192757 1.981401
+frozenset({circ=2.0, catr=3.0, agg=1})                      frozenset({accident_grave=True}) 0.069290    0.437686 1.978150
+                 frozenset({catr=3.0})      frozenset({atm=1.0, agg=1, accident_grave=True}) 0.058087    0.173019 1.968516
+frozenset({catr=3.0, sexe=1.0, agg=1})                      frozenset({accident_grave=True}) 0.052493    0.435485 1.968204
+[14:14:38] [Association] FP-Growth (capped itemset size)...
+
+[FP-Growth] 172932 rules, 6270 about serious accidents.
+                     antecedents                                           consequents  support  confidence     lift
+           frozenset({situ=3.0})     frozenset({agg=1, obsm=0.0, accident_grave=True}) 0.021240    0.342286 7.142867
+    frozenset({agg=1, obsm=0.0})            frozenset({accident_grave=True, situ=3.0}) 0.021240    0.191196 6.734636
+    frozenset({agg=1, situ=3.0})            frozenset({obsm=0.0, accident_grave=True}) 0.021240    0.496455 6.719142
+ frozenset({circ=2.0, situ=3.0})            frozenset({obsm=0.0, accident_grave=True}) 0.020980    0.468757 6.344270
+           frozenset({situ=3.0})  frozenset({circ=2.0, obsm=0.0, accident_grave=True}) 0.020980    0.338096 6.306589
+  frozenset({int=1.0, situ=3.0})            frozenset({obsm=0.0, accident_grave=True}) 0.023973    0.439126 5.943233
+           frozenset({situ=3.0})   frozenset({int=1.0, obsm=0.0, accident_grave=True}) 0.023973    0.386334 5.928707
+ frozenset({circ=2.0, obsm=0.0})            frozenset({accident_grave=True, situ=3.0}) 0.020980    0.165141 5.816855
+           frozenset({situ=3.0}) frozenset({infra=0.0, obsm=0.0, accident_grave=True}) 0.023543    0.379405 5.752335
+frozenset({infra=0.0, situ=3.0})            frozenset({obsm=0.0, accident_grave=True}) 0.023543    0.414617 5.611526
+           frozenset({situ=3.0})  frozenset({vosp=0.0, obsm=0.0, accident_grave=True}) 0.024627    0.396863 5.588044
+ frozenset({vosp=0.0, situ=3.0})            frozenset({obsm=0.0, accident_grave=True}) 0.024627    0.412645 5.584840
+           frozenset({situ=3.0})            frozenset({obsm=0.0, accident_grave=True}) 0.025080    0.404168 5.470114
+     frozenset({col=6.0, agg=1})            frozenset({obsm=0.0, accident_grave=True}) 0.024357    0.372749 5.044876
+           frozenset({obsm=1.0})    frozenset({obs=0.0, col=6.0, accident_grave=True}) 0.028540    0.185116 5.002693
+   frozenset({int=1.0, col=7.0})            frozenset({obsm=0.0, accident_grave=True}) 0.020643    0.368412 4.986172
+  frozenset({int=1.0, obsm=0.0})            frozenset({accident_grave=True, situ=3.0}) 0.023973    0.138048 4.862541
+            frozenset({col=7.0})   frozenset({int=1.0, obsm=0.0, accident_grave=True}) 0.020643    0.312620 4.797482
+            frozenset({col=7.0}) frozenset({infra=0.0, obsm=0.0, accident_grave=True}) 0.020853    0.315800 4.787994
+  frozenset({col=7.0, vosp=0.0})            frozenset({obsm=0.0, accident_grave=True}) 0.022090    0.352838 4.775392
+   frozenset({obs=0.0, col=6.0})            frozenset({obsm=1.0, accident_grave=True}) 0.028540    0.153918 4.775121
+ frozenset({col=7.0, infra=0.0})            frozenset({obsm=0.0, accident_grave=True}) 0.020853    0.351303 4.754617
+            frozenset({col=7.0})  frozenset({vosp=0.0, obsm=0.0, accident_grave=True}) 0.022090    0.334528 4.710335
+  frozenset({int=1.0, obsm=0.0})             frozenset({col=7.0, accident_grave=True}) 0.020643    0.118872 4.694792
+            frozenset({col=7.0})            frozenset({obsm=0.0, accident_grave=True}) 0.022867    0.346290 4.686769
+frozenset({infra=0.0, obsm=0.0})            frozenset({accident_grave=True, situ=3.0}) 0.023543    0.127376 4.486651
+frozenset({infra=0.0, obsm=0.0})             frozenset({col=7.0, accident_grave=True}) 0.020853    0.112822 4.455859
+ frozenset({vosp=0.0, obsm=0.0})             frozenset({col=7.0, accident_grave=True}) 0.022090    0.111447 4.401558
+           frozenset({obsm=0.0})     frozenset({agg=1, accident_grave=True, situ=3.0}) 0.021240    0.101302 4.389804
+ frozenset({vosp=0.0, obsm=0.0})            frozenset({accident_grave=True, situ=3.0}) 0.024627    0.124245 4.376377
+
+Frequent itemsets - Apriori: 31,496; FP-Growth: 78,777.
+[14:20:07] === 4. Heat calendars ===
+[14:20:10] Done. Results in C:\Users\UCA\Desktop\baac_final\outputs\02_risk_factors
+
+======================================================================
+STEP 03 - spatial segmentation
+======================================================================
+[14:20:17] Loading parquet dataset: C:\Users\UCA\Desktop\baac_final\data\processed\parquet
+[14:20:17] Loaded 2,887,353 rows x 10 columns (0.24 GB in memory).
+[!] 9,816 rows rejected: outside every known French territory (coordinates probably corrupted).
+Valid spatial data: 653,817 geolocated accidents (22.6 % of starting rows).
+By territory:
+territory
+Mainland France (+ Corsica)        635984
+Reunion                              4873
+French Guiana                        3099
+Martinique                           3062
+Guadeloupe                           2811
+New Caledonia                        1603
+Mayotte                              1070
+French Polynesia                      972
+Saint-Martin / Saint-Barthelemy       272
+Wallis and Futuna                      52
+Saint-Pierre-et-Miquelon               19
+[14:20:21] === 1. Spatial clustering - DBSCAN ===
+[DBSCAN] Sample of 150,000 accidents used (of 653,817).
+[DBSCAN] 383 clusters, 59.5 % noise (eps=0.5 km, min_samples=15, sample=150,000 accidents)
+[14:20:35] === 2. Spatial clustering - HDBSCAN ===
+[HDBSCAN] Sample of 100,000 accidents used (of 653,817).
+[HDBSCAN] 451 clusters, 40.3 % noise (min_cluster_size=25)
+[14:21:15] === 3. Spatio-temporal clustering - ST-DBSCAN ===
+[ST-DBSCAN] Sample of 50,000 accidents used (of 653,817).
+[ST-DBSCAN, mode=absolute] 5 clusters, 99.9 % noise (eps_spatial=0.5 km, eps_temporal=2.0 h, min_samples=8)
+[ST-DBSCAN] Sample of 50,000 accidents used (of 653,817).
+[ST-DBSCAN, mode=hour_of_day] 171 clusters, 87.4 % noise (eps_spatial=0.5 km, eps_temporal=2.0 h, min_samples=8)
+[14:21:23] === 4. Exposure normalisation ===
+
+[!] No exposure file (config.EXPOSURE_FILE). The ranking below is RAW accident density per municipality: it mostly reflects population and traffic, NOT a higher intrinsic risk. Do not read it as 'high-risk zones' without normalising by an exposure indicator.
+
+Top 10 municipalities by raw accident count:
+  com  n_accidents
+13055        13492
+35238         5116
+34172         4997
+75116         4819
+49007         4479
+75112         3871
+75117         3544
+75119         3319
+75115         3251
+75113         3202
+[14:21:27] Done. Results in C:\Users\UCA\Desktop\baac_final\outputs\03_spatial_segmentation
+
+======================================================================
+STEP 04 - severity prediction (extended_ceinture)
+======================================================================
+[14:21:34] Feature set: extended_ceinture | profile: conservative | output: C:\Users\UCA\Desktop\baac_final\outputs\04_severity_prediction\extended_ceinture
+[14:21:34] Loading parquet dataset: C:\Users\UCA\Desktop\baac_final\data\processed\parquet
+[14:21:35] Loaded 2,887,353 rows x 40 columns (0.87 GB in memory).
+
+=== Variant 'full' ===
+[14:21:36] [features] feature set 'extended_ceinture': added columns = ['equip_ceinture', 'catu', 'place', 'motor', 'senc', 'mois', 'locp', 'actp', 'etatp']
+[14:21:36] Building features on 2,886,934 rows...
+Temporal split: 2,509,655 training rows (2005-2021), 377,279 test rows (2022-2024).
+[14:21:43] --- Training RandomForest (full) on 2,509,655 rows (37 features) ---
+[Parallel(n_jobs=1)]: Done  40 tasks      | elapsed:  1.4min
+[Parallel(n_jobs=1)]: Done 150 out of 150 | elapsed:  5.1min finished
+[Parallel(n_jobs=1)]: Done  40 tasks      | elapsed:    4.3s
+[Parallel(n_jobs=1)]: Done 150 out of 150 | elapsed:   16.2s finished
+building tree 1 of 150
+building tree 2 of 150
+building tree 3 of 150
+building tree 4 of 150
+building tree 5 of 150
+building tree 6 of 150
+building tree 7 of 150
+building tree 8 of 150
+building tree 9 of 150
+building tree 10 of 150
+building tree 11 of 150
+building tree 12 of 150
+building tree 13 of 150
+building tree 14 of 150
+building tree 15 of 150
+building tree 16 of 150
+building tree 17 of 150
+building tree 18 of 150
+building tree 19 of 150
+building tree 20 of 150
+building tree 21 of 150
+building tree 22 of 150
+building tree 23 of 150
+building tree 24 of 150
+building tree 25 of 150
+building tree 26 of 150
+building tree 27 of 150
+building tree 28 of 150
+building tree 29 of 150
+building tree 30 of 150
+building tree 31 of 150
+building tree 32 of 150
+building tree 33 of 150
+building tree 34 of 150
+building tree 35 of 150
+building tree 36 of 150
+building tree 37 of 150
+building tree 38 of 150
+building tree 39 of 150
+building tree 40 of 150
+building tree 41 of 150
+building tree 42 of 150
+building tree 43 of 150
+building tree 44 of 150
+building tree 45 of 150
+building tree 46 of 150
+building tree 47 of 150
+building tree 48 of 150
+building tree 49 of 150
+building tree 50 of 150
+building tree 51 of 150
+building tree 52 of 150
+building tree 53 of 150
+building tree 54 of 150
+building tree 55 of 150
+building tree 56 of 150
+building tree 57 of 150
+building tree 58 of 150
+building tree 59 of 150
+building tree 60 of 150
+building tree 61 of 150
+building tree 62 of 150
+building tree 63 of 150
+building tree 64 of 150
+building tree 65 of 150
+building tree 66 of 150
+building tree 67 of 150
+building tree 68 of 150
+building tree 69 of 150
+building tree 70 of 150
+building tree 71 of 150
+building tree 72 of 150
+building tree 73 of 150
+building tree 74 of 150
+building tree 75 of 150
+building tree 76 of 150
+building tree 77 of 150
+building tree 78 of 150
+building tree 79 of 150
+building tree 80 of 150
+building tree 81 of 150
+building tree 82 of 150
+building tree 83 of 150
+building tree 84 of 150
+building tree 85 of 150
+building tree 86 of 150
+building tree 87 of 150
+building tree 88 of 150
+building tree 89 of 150
+building tree 90 of 150
+building tree 91 of 150
+building tree 92 of 150
+building tree 93 of 150
+building tree 94 of 150
+building tree 95 of 150
+building tree 96 of 150
+building tree 97 of 150
+building tree 98 of 150
+building tree 99 of 150
+building tree 100 of 150
+building tree 101 of 150
+building tree 102 of 150
+building tree 103 of 150
+building tree 104 of 150
+building tree 105 of 150
+building tree 106 of 150
+building tree 107 of 150
+building tree 108 of 150
+building tree 109 of 150
+building tree 110 of 150
+building tree 111 of 150
+building tree 112 of 150
+building tree 113 of 150
+building tree 114 of 150
+building tree 115 of 150
+building tree 116 of 150
+building tree 117 of 150
+building tree 118 of 150
+building tree 119 of 150
+building tree 120 of 150
+building tree 121 of 150
+building tree 122 of 150
+building tree 123 of 150
+building tree 124 of 150
+building tree 125 of 150
+building tree 126 of 150
+building tree 127 of 150
+building tree 128 of 150
+building tree 129 of 150
+building tree 130 of 150
+building tree 131 of 150
+building tree 132 of 150
+building tree 133 of 150
+building tree 134 of 150
+building tree 135 of 150
+building tree 136 of 150
+building tree 137 of 150
+building tree 138 of 150
+building tree 139 of 150
+building tree 140 of 150
+building tree 141 of 150
+building tree 142 of 150
+building tree 143 of 150
+building tree 144 of 150
+building tree 145 of 150
+building tree 146 of 150
+building tree 147 of 150
+building tree 148 of 150
+building tree 149 of 150
+building tree 150 of 150
+[14:27:08] --- RandomForest (full) done ---
+              precision    recall  f1-score   support
+
+           1       0.74      0.77      0.76    159949
+           2       0.68      0.55      0.61    149293
+           3       0.40      0.22      0.28     57657
+           4       0.13      0.71      0.22     10380
+
+    accuracy                           0.60    377279
+   macro avg       0.49      0.56      0.47    377279
+weighted avg       0.65      0.60      0.61    377279
+
+macro_f1=0.466  weighted_f1=0.611  accuracy=0.599  ordinal_mae=0.536  qwk=0.522  precision_killed=0.128  recall_killed=0.712  f1_killed=0.217
+[14:27:09] --- Training XGBoost (full) on 2,509,655 rows (37 features) ---
+[14:46:03] --- XGBoost (full) done ---
+              precision    recall  f1-score   support
+
+           1       0.78      0.77      0.77    159949
+           2       0.68      0.58      0.62    149293
+           3       0.42      0.29      0.34     57657
+           4       0.14      0.70      0.24     10380
+
+    accuracy                           0.62    377279
+   macro avg       0.50      0.59      0.50    377279
+weighted avg       0.66      0.62      0.63    377279
+
+macro_f1=0.495  weighted_f1=0.634  accuracy=0.621  ordinal_mae=0.490  qwk=0.564  precision_killed=0.144  recall_killed=0.699  f1_killed=0.239
+[14:46:04] --- Training XGBoost-Ordinal (full) on 2,509,655 rows (37 features) ---
+[14:59:26] --- XGBoost-Ordinal (full) done ---
+              precision    recall  f1-score   support
+
+           1       0.71      0.86      0.78    159949
+           2       0.70      0.54      0.61    149293
+           3       0.46      0.32      0.38     57657
+           4       0.20      0.53      0.29     10380
+
+    accuracy                           0.64    377279
+   macro avg       0.52      0.57      0.52    377279
+weighted avg       0.66      0.64      0.64    377279
+
+macro_f1=0.515  weighted_f1=0.639  accuracy=0.644  ordinal_mae=0.433  qwk=0.594  precision_killed=0.198  recall_killed=0.535  f1_killed=0.289
+[14:59:27] --- Training XGBoost-SMOTE (full) on 2,509,655 rows (37 features) ---
+[14:59:30] [SMOTE] Stratified subsample of 300,000 rows before SMOTENC (limit: 300,000).
+[14:59:30] [SMOTE] Applying SMOTENC on 300,000 rows...
+[15:23:59] [SMOTE] Rebalanced set: 492,076 rows (classes: {1: 123019, 2: 123019, 3: 123019, 4: 123019}).
+[15:27:58] --- XGBoost-SMOTE (full) done ---
+              precision    recall  f1-score   support
+
+           1       0.74      0.81      0.77    159949
+           2       0.65      0.63      0.64    149293
+           3       0.48      0.39      0.43     57657
+           4       0.24      0.20      0.22     10380
+
+    accuracy                           0.66    377279
+   macro avg       0.53      0.51      0.52    377279
+weighted avg       0.65      0.66      0.65    377279
+
+macro_f1=0.516  weighted_f1=0.653  accuracy=0.660  ordinal_mae=0.397  qwk=0.580  precision_killed=0.241  recall_killed=0.198  f1_killed=0.218
+[15:27:59] --- Training LightGBM (full) on 2,509,655 rows (37 features) ---
+[LightGBM] [Info] Auto-choosing row-wise multi-threading, the overhead of testing was 1.394226 seconds.
+You can set `force_row_wise=true` to remove the overhead.
+And if memory is not enough, you can set `force_col_wise=true`.
+[LightGBM] [Info] Total Bins 1318
+[LightGBM] [Info] Number of data points in the train set: 2509655, number of used features: 37
+[LightGBM] [Info] Start training from score -1.386294
+[LightGBM] [Info] Start training from score -1.386294
+[LightGBM] [Info] Start training from score -1.386294
+[LightGBM] [Info] Start training from score -1.386294
+[15:36:55] --- LightGBM (full) done ---
+              precision    recall  f1-score   support
+
+           1       0.78      0.76      0.77    159949
+           2       0.67      0.58      0.62    149293
+           3       0.42      0.28      0.33     57657
+           4       0.14      0.72      0.23     10380
+
+    accuracy                           0.61    377279
+   macro avg       0.50      0.59      0.49    377279
+weighted avg       0.66      0.61      0.63    377279
+
+macro_f1=0.489  weighted_f1=0.630  accuracy=0.614  ordinal_mae=0.505  qwk=0.555  precision_killed=0.138  recall_killed=0.725  f1_killed=0.231
+
+--- SHAP for XGBoost-SMOTE (full) ---
+Saved: C:\Users\UCA\Desktop\baac_final\outputs\04_severity_prediction\extended_ceinture\shap_summary_full_XGBoost-SMOTE.png
+
+=== Variant 'geo' ===
+[15:38:47] [features] feature set 'extended_ceinture': added columns = ['equip_ceinture', 'catu', 'place', 'motor', 'senc', 'mois', 'locp', 'actp', 'etatp']
+[15:38:47] Cluster file: 150,000 accidents.
+[15:38:47] Geolocated subset with a spatial cluster: 339,326 user rows.
+[15:38:47] Building features on 339,326 rows...
+Temporal split: 253,596 training rows (2005-2021), 85,730 test rows (2022-2024).
+[15:38:48] --- Training RandomForest (geo) on 253,596 rows (38 features) ---
+[Parallel(n_jobs=1)]: Done  40 tasks      | elapsed:    5.2s
+[Parallel(n_jobs=1)]: Done 150 out of 150 | elapsed:   20.0s finished
+[Parallel(n_jobs=1)]: Done  40 tasks      | elapsed:    0.8s
+[Parallel(n_jobs=1)]: Done 150 out of 150 | elapsed:    3.4s finished
+building tree 1 of 150
+building tree 2 of 150
+building tree 3 of 150
+building tree 4 of 150
+building tree 5 of 150
+building tree 6 of 150
+building tree 7 of 150
+building tree 8 of 150
+building tree 9 of 150
+building tree 10 of 150
+building tree 11 of 150
+building tree 12 of 150
+building tree 13 of 150
+building tree 14 of 150
+building tree 15 of 150
+building tree 16 of 150
+building tree 17 of 150
+building tree 18 of 150
+building tree 19 of 150
+building tree 20 of 150
+building tree 21 of 150
+building tree 22 of 150
+building tree 23 of 150
+building tree 24 of 150
+building tree 25 of 150
+building tree 26 of 150
+building tree 27 of 150
+building tree 28 of 150
+building tree 29 of 150
+building tree 30 of 150
+building tree 31 of 150
+building tree 32 of 150
+building tree 33 of 150
+building tree 34 of 150
+building tree 35 of 150
+building tree 36 of 150
+building tree 37 of 150
+building tree 38 of 150
+building tree 39 of 150
+building tree 40 of 150
+building tree 41 of 150
+building tree 42 of 150
+building tree 43 of 150
+building tree 44 of 150
+building tree 45 of 150
+building tree 46 of 150
+building tree 47 of 150
+building tree 48 of 150
+building tree 49 of 150
+building tree 50 of 150
+building tree 51 of 150
+building tree 52 of 150
+building tree 53 of 150
+building tree 54 of 150
+building tree 55 of 150
+building tree 56 of 150
+building tree 57 of 150
+building tree 58 of 150
+building tree 59 of 150
+building tree 60 of 150
+building tree 61 of 150
+building tree 62 of 150
+building tree 63 of 150
+building tree 64 of 150
+building tree 65 of 150
+building tree 66 of 150
+building tree 67 of 150
+building tree 68 of 150
+building tree 69 of 150
+building tree 70 of 150
+building tree 71 of 150
+building tree 72 of 150
+building tree 73 of 150
+building tree 74 of 150
+building tree 75 of 150
+building tree 76 of 150
+building tree 77 of 150
+building tree 78 of 150
+building tree 79 of 150
+building tree 80 of 150
+building tree 81 of 150
+building tree 82 of 150
+building tree 83 of 150
+building tree 84 of 150
+building tree 85 of 150
+building tree 86 of 150
+building tree 87 of 150
+building tree 88 of 150
+building tree 89 of 150
+building tree 90 of 150
+building tree 91 of 150
+building tree 92 of 150
+building tree 93 of 150
+building tree 94 of 150
+building tree 95 of 150
+building tree 96 of 150
+building tree 97 of 150
+building tree 98 of 150
+building tree 99 of 150
+building tree 100 of 150
+building tree 101 of 150
+building tree 102 of 150
+building tree 103 of 150
+building tree 104 of 150
+building tree 105 of 150
+building tree 106 of 150
+building tree 107 of 150
+building tree 108 of 150
+building tree 109 of 150
+building tree 110 of 150
+building tree 111 of 150
+building tree 112 of 150
+building tree 113 of 150
+building tree 114 of 150
+building tree 115 of 150
+building tree 116 of 150
+building tree 117 of 150
+building tree 118 of 150
+building tree 119 of 150
+building tree 120 of 150
+building tree 121 of 150
+building tree 122 of 150
+building tree 123 of 150
+building tree 124 of 150
+building tree 125 of 150
+building tree 126 of 150
+building tree 127 of 150
+building tree 128 of 150
+building tree 129 of 150
+building tree 130 of 150
+building tree 131 of 150
+building tree 132 of 150
+building tree 133 of 150
+building tree 134 of 150
+building tree 135 of 150
+building tree 136 of 150
+building tree 137 of 150
+building tree 138 of 150
+building tree 139 of 150
+building tree 140 of 150
+building tree 141 of 150
+building tree 142 of 150
+building tree 143 of 150
+building tree 144 of 150
+building tree 145 of 150
+building tree 146 of 150
+building tree 147 of 150
+building tree 148 of 150
+building tree 149 of 150
+building tree 150 of 150
+[15:39:12] --- RandomForest (geo) done ---
+              precision    recall  f1-score   support
+
+           1       0.74      0.77      0.76     36348
+           2       0.68      0.55      0.61     33714
+           3       0.41      0.34      0.37     13232
+           4       0.15      0.58      0.24      2436
+
+    accuracy                           0.61     85730
+   macro avg       0.50      0.56      0.50     85730
+weighted avg       0.65      0.61      0.63     85730
+
+macro_f1=0.495  weighted_f1=0.625  accuracy=0.615  ordinal_mae=0.496  qwk=0.540  precision_killed=0.151  recall_killed=0.577  f1_killed=0.240
+[15:39:13] --- Training XGBoost (geo) on 253,596 rows (38 features) ---
+[15:41:12] --- XGBoost (geo) done ---
+              precision    recall  f1-score   support
+
+           1       0.77      0.77      0.77     36348
+           2       0.66      0.60      0.63     33714
+           3       0.43      0.39      0.41     13232
+           4       0.17      0.52      0.25      2436
+
+    accuracy                           0.63     85730
+   macro avg       0.51      0.57      0.52     85730
+weighted avg       0.66      0.63      0.64     85730
+
+macro_f1=0.516  weighted_f1=0.645  accuracy=0.635  ordinal_mae=0.450  qwk=0.583  precision_killed=0.169  recall_killed=0.518  f1_killed=0.255
+[15:41:13] --- Training XGBoost-Ordinal (geo) on 253,596 rows (38 features) ---
+[15:42:39] --- XGBoost-Ordinal (geo) done ---
+              precision    recall  f1-score   support
+
+           1       0.72      0.84      0.78     36348
+           2       0.69      0.54      0.61     33714
+           3       0.44      0.43      0.44     13232
+           4       0.21      0.37      0.27      2436
+
+    accuracy                           0.65     85730
+   macro avg       0.52      0.55      0.52     85730
+weighted avg       0.65      0.65      0.64     85730
+
+macro_f1=0.523  weighted_f1=0.643  accuracy=0.646  ordinal_mae=0.424  qwk=0.594  precision_killed=0.214  recall_killed=0.374  f1_killed=0.272
+[15:42:40] --- Training XGBoost-SMOTE (geo) on 253,596 rows (38 features) ---
+[15:42:40] [SMOTE] Applying SMOTENC on 253,596 rows...
+[16:00:37] [SMOTE] Rebalanced set: 411,292 rows (classes: {1: 102823, 2: 102823, 3: 102823, 4: 102823}).
+[16:03:49] --- XGBoost-SMOTE (geo) done ---
+              precision    recall  f1-score   support
+
+           1       0.75      0.80      0.77     36348
+           2       0.66      0.63      0.64     33714
+           3       0.47      0.46      0.46     13232
+           4       0.25      0.19      0.22      2436
+
+    accuracy                           0.66     85730
+   macro avg       0.53      0.52      0.52     85730
+weighted avg       0.66      0.66      0.66     85730
+
+macro_f1=0.524  weighted_f1=0.658  accuracy=0.661  ordinal_mae=0.395  qwk=0.593  precision_killed=0.247  recall_killed=0.193  f1_killed=0.217
+[16:03:49] --- Training LightGBM (geo) on 253,596 rows (38 features) ---
+[LightGBM] [Info] Auto-choosing row-wise multi-threading, the overhead of testing was 0.141134 seconds.
+You can set `force_row_wise=true` to remove the overhead.
+And if memory is not enough, you can set `force_col_wise=true`.
+[LightGBM] [Info] Total Bins 1577
+[LightGBM] [Info] Number of data points in the train set: 253596, number of used features: 38
+[LightGBM] [Info] Start training from score -1.386294
+[LightGBM] [Info] Start training from score -1.386294
+[LightGBM] [Info] Start training from score -1.386294
+[LightGBM] [Info] Start training from score -1.386294
+[16:04:55] --- LightGBM (geo) done ---
+              precision    recall  f1-score   support
+
+           1       0.78      0.76      0.77     36348
+           2       0.67      0.59      0.63     33714
+           3       0.43      0.38      0.41     13232
+           4       0.16      0.56      0.25      2436
+
+    accuracy                           0.63     85730
+   macro avg       0.51      0.57      0.51     85730
+weighted avg       0.66      0.63      0.64     85730
+
+macro_f1=0.513  weighted_f1=0.642  accuracy=0.630  ordinal_mae=0.463  qwk=0.576  precision_killed=0.161  recall_killed=0.555  f1_killed=0.250
+
+--- SHAP for XGBoost-SMOTE (geo) ---
+Saved: C:\Users\UCA\Desktop\baac_final\outputs\04_severity_prediction\extended_ceinture\shap_summary_geo_XGBoost-SMOTE.png
+
+=== Comparison ===
+variant           model       feature_set  macro_f1  weighted_f1  accuracy  ordinal_mae    qwk  precision_killed  recall_killed  f1_killed
+   full   XGBoost-SMOTE extended_ceinture    0.5155       0.6531    0.6598       0.3966 0.5804            0.2412         0.1981     0.2175
+   full XGBoost-Ordinal extended_ceinture    0.5150       0.6391    0.6439       0.4335 0.5936            0.1976         0.5348     0.2885
+   full         XGBoost extended_ceinture    0.4953       0.6343    0.6206       0.4896 0.5645            0.1444         0.6988     0.2394
+   full        LightGBM extended_ceinture    0.4892       0.6302    0.6143       0.5047 0.5551            0.1377         0.7250     0.2315
+   full    RandomForest extended_ceinture    0.4665       0.6107    0.5987       0.5357 0.5223            0.1282         0.7119     0.2173
+    geo   XGBoost-SMOTE extended_ceinture    0.5236       0.6576    0.6609       0.3949 0.5935            0.2467         0.1929     0.2165
+    geo XGBoost-Ordinal extended_ceinture    0.5228       0.6429    0.6458       0.4244 0.5940            0.2140         0.3736     0.2721
+    geo         XGBoost extended_ceinture    0.5162       0.6446    0.6348       0.4504 0.5828            0.1689         0.5185     0.2548
+    geo        LightGBM extended_ceinture    0.5126       0.6419    0.6301       0.4628 0.5760            0.1610         0.5550     0.2497
+    geo    RandomForest extended_ceinture    0.4951       0.6255    0.6148       0.4961 0.5405            0.1512         0.5768     0.2396
+[16:06:43] Done. Results, confusion matrices and SHAP figures in C:\Users\UCA\Desktop\baac_final\outputs\04_severity_prediction\extended_ceinture
+
+======================================================================
+STEP 05 - robustness (extended_ceinture)
+======================================================================
+[16:06:50] Loading parquet dataset: C:\Users\UCA\Desktop\baac_final\data\processed\parquet
+[16:06:51] Loaded 2,887,353 rows x 40 columns (0.87 GB in memory).
+[16:06:51] ===== Variant geo =====
+[16:06:52] [features] feature set 'extended_ceinture': added columns = ['equip_ceinture', 'catu', 'place', 'motor', 'senc', 'mois', 'locp', 'actp', 'etatp']
+[16:06:52] Cluster file: 150,000 accidents.
+[16:06:53] Geolocated subset with a spatial cluster: 339,326 user rows.
+[16:06:53] Building features on 339,326 rows...
+Temporal split: 253,596 training rows (2005-2021), 85,730 test rows (2022-2024).
+[16:06:54] train=253,596 test=85,730 features=38
+[16:06:55] --- XGBoost (geo) seed 0 ---
+[16:08:54]    macro_f1=0.516 | weighted_f1=0.645 | accuracy=0.635 | ordinal_mae=0.450 | qwk=0.583 | precision_killed=0.169 | recall_killed=0.518 | f1_killed=0.255
+[16:08:54] --- XGBoost-Ordinal (geo) seed 0 ---
+[16:10:20]    macro_f1=0.523 | weighted_f1=0.643 | accuracy=0.646 | ordinal_mae=0.424 | qwk=0.594 | precision_killed=0.214 | recall_killed=0.374 | f1_killed=0.272
+[16:10:20] --- XGBoost-SMOTE (geo) seed 0 ---
+[16:10:20] [SMOTE] Applying SMOTENC on 253,596 rows...
+[16:28:18] [SMOTE] Rebalanced set: 411,292 rows (classes: {1: 102823, 2: 102823, 3: 102823, 4: 102823}).
+[16:31:30]    macro_f1=0.524 | weighted_f1=0.658 | accuracy=0.661 | ordinal_mae=0.395 | qwk=0.593 | precision_killed=0.247 | recall_killed=0.193 | f1_killed=0.217
+[16:31:30] --- XGBoost (geo) seed 1 ---
+[16:33:31]    macro_f1=0.518 | weighted_f1=0.646 | accuracy=0.636 | ordinal_mae=0.449 | qwk=0.585 | precision_killed=0.171 | recall_killed=0.522 | f1_killed=0.257
+[16:33:31] --- XGBoost-Ordinal (geo) seed 1 ---
+[16:34:56]    macro_f1=0.524 | weighted_f1=0.643 | accuracy=0.646 | ordinal_mae=0.424 | qwk=0.597 | precision_killed=0.213 | recall_killed=0.385 | f1_killed=0.275
+[16:34:57] --- XGBoost-SMOTE (geo) seed 1 ---
+[16:34:57] [SMOTE] Applying SMOTENC on 253,596 rows...
+[16:52:56] [SMOTE] Rebalanced set: 411,292 rows (classes: {1: 102823, 2: 102823, 3: 102823, 4: 102823}).
+[16:56:07]    macro_f1=0.525 | weighted_f1=0.659 | accuracy=0.662 | ordinal_mae=0.394 | qwk=0.594 | precision_killed=0.245 | recall_killed=0.192 | f1_killed=0.215
+[16:56:07] --- XGBoost (geo) seed 2 ---
+[16:58:06]    macro_f1=0.518 | weighted_f1=0.646 | accuracy=0.636 | ordinal_mae=0.448 | qwk=0.586 | precision_killed=0.170 | recall_killed=0.512 | f1_killed=0.255
+[16:58:06] --- XGBoost-Ordinal (geo) seed 2 ---
+[16:59:32]    macro_f1=0.519 | weighted_f1=0.641 | accuracy=0.644 | ordinal_mae=0.426 | qwk=0.595 | precision_killed=0.205 | recall_killed=0.376 | f1_killed=0.266
+[16:59:32] --- XGBoost-SMOTE (geo) seed 2 ---
+[16:59:32] [SMOTE] Applying SMOTENC on 253,596 rows...
+[17:17:30] [SMOTE] Rebalanced set: 411,292 rows (classes: {1: 102823, 2: 102823, 3: 102823, 4: 102823}).
+[17:20:41]    macro_f1=0.525 | weighted_f1=0.658 | accuracy=0.661 | ordinal_mae=0.394 | qwk=0.595 | precision_killed=0.253 | recall_killed=0.189 | f1_killed=0.216
+[17:20:41] --- XGBoost (geo) seed 3 ---
+[17:22:40]    macro_f1=0.519 | weighted_f1=0.647 | accuracy=0.637 | ordinal_mae=0.447 | qwk=0.586 | precision_killed=0.171 | recall_killed=0.506 | f1_killed=0.255
+[17:22:40] --- XGBoost-Ordinal (geo) seed 3 ---
+[17:24:06]    macro_f1=0.520 | weighted_f1=0.641 | accuracy=0.644 | ordinal_mae=0.426 | qwk=0.596 | precision_killed=0.206 | recall_killed=0.383 | f1_killed=0.268
+[17:24:06] --- XGBoost-SMOTE (geo) seed 3 ---
+[17:24:06] [SMOTE] Applying SMOTENC on 253,596 rows...
+[17:42:04] [SMOTE] Rebalanced set: 411,292 rows (classes: {1: 102823, 2: 102823, 3: 102823, 4: 102823}).
+[17:45:15]    macro_f1=0.524 | weighted_f1=0.658 | accuracy=0.661 | ordinal_mae=0.394 | qwk=0.595 | precision_killed=0.247 | recall_killed=0.195 | f1_killed=0.218
+[17:45:15] --- XGBoost (geo) seed 4 ---
+[17:47:15]    macro_f1=0.519 | weighted_f1=0.647 | accuracy=0.637 | ordinal_mae=0.446 | qwk=0.585 | precision_killed=0.170 | recall_killed=0.499 | f1_killed=0.254
+[17:47:15] --- XGBoost-Ordinal (geo) seed 4 ---
+[17:48:40]    macro_f1=0.516 | weighted_f1=0.640 | accuracy=0.642 | ordinal_mae=0.428 | qwk=0.596 | precision_killed=0.197 | recall_killed=0.363 | f1_killed=0.255
+[17:48:40] --- XGBoost-SMOTE (geo) seed 4 ---
+[17:48:40] [SMOTE] Applying SMOTENC on 253,596 rows...
+[18:06:39] [SMOTE] Rebalanced set: 411,292 rows (classes: {1: 102823, 2: 102823, 3: 102823, 4: 102823}).
+[18:09:51]    macro_f1=0.524 | weighted_f1=0.659 | accuracy=0.662 | ordinal_mae=0.394 | qwk=0.595 | precision_killed=0.244 | recall_killed=0.188 | f1_killed=0.212
+[18:09:51] Bootstrap (1000 replicates) - seed 0
+[18:09:52] bootstrap 200/1000
+[18:09:53] bootstrap 400/1000
+[18:09:54] bootstrap 600/1000
+[18:09:55] bootstrap 800/1000
+[18:09:56] bootstrap 1000/1000
+
+=== Mean +/- standard deviation over seeds ===
+
+geo / XGBoost
+   macro_f1          0.518 +/- 0.001
+   weighted_f1       0.646 +/- 0.001
+   accuracy          0.636 +/- 0.001
+   ordinal_mae       0.448 +/- 0.002
+   qwk               0.585 +/- 0.001
+   precision_killed  0.170 +/- 0.001
+   recall_killed     0.511 +/- 0.009
+   f1_killed         0.255 +/- 0.001
+
+geo / XGBoost-Ordinal
+   macro_f1          0.520 +/- 0.003
+   weighted_f1       0.642 +/- 0.001
+   accuracy          0.644 +/- 0.001
+   ordinal_mae       0.426 +/- 0.001
+   qwk               0.596 +/- 0.001
+   precision_killed  0.207 +/- 0.007
+   recall_killed     0.376 +/- 0.009
+   f1_killed         0.267 +/- 0.007
+
+geo / XGBoost-SMOTE
+   macro_f1          0.524 +/- 0.001
+   weighted_f1       0.658 +/- 0.001
+   accuracy          0.661 +/- 0.000
+   ordinal_mae       0.394 +/- 0.000
+   qwk               0.595 +/- 0.001
+   precision_killed  0.247 +/- 0.004
+   recall_killed     0.191 +/- 0.003
+   f1_killed         0.216 +/- 0.002
+
+=== Paired bootstrap differences ===
+variant         model_A         model_B      metric  diff_A_minus_B  ci95_low  ci95_high  p_bootstrap  significant_95
+    geo         XGBoost XGBoost-Ordinal    macro_f1         -0.0066   -0.0102    -0.0027        0.000            True
+    geo         XGBoost XGBoost-Ordinal ordinal_mae          0.0262    0.0226     0.0295        0.000            True
+    geo         XGBoost XGBoost-Ordinal         qwk         -0.0113   -0.0158    -0.0067        0.000            True
+    geo         XGBoost XGBoost-Ordinal   f1_killed         -0.0172   -0.0280    -0.0065        0.006            True
+    geo         XGBoost   XGBoost-SMOTE    macro_f1         -0.0073   -0.0122    -0.0027        0.000            True
+    geo         XGBoost   XGBoost-SMOTE ordinal_mae          0.0555    0.0523     0.0590        0.000            True
+    geo         XGBoost   XGBoost-SMOTE         qwk         -0.0106   -0.0155    -0.0062        0.000            True
+    geo         XGBoost   XGBoost-SMOTE   f1_killed          0.0387    0.0227     0.0533        0.000            True
+    geo XGBoost-Ordinal   XGBoost-SMOTE    macro_f1         -0.0007   -0.0051     0.0042        0.792           False
+    geo XGBoost-Ordinal   XGBoost-SMOTE ordinal_mae          0.0293    0.0265     0.0322        0.000            True
+    geo XGBoost-Ordinal   XGBoost-SMOTE         qwk          0.0007   -0.0032     0.0044        0.718           False
+    geo XGBoost-Ordinal   XGBoost-SMOTE   f1_killed          0.0559    0.0411     0.0720        0.000            True
+[18:09:56] Done. Files in C:\Users\UCA\Desktop\baac_final\outputs\04_severity_prediction\extended_ceinture\robustness
+
+======================================================================
+ALL DONE. Results in: C:\Users\UCA\Desktop\baac_final\outputs
+======================================================================
